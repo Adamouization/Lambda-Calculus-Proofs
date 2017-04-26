@@ -27,17 +27,17 @@
 	\textbf{Show that the term \textit{``[3,2,1] times 1''} $\beta$-reduces to 6:}
 
 	\begin{align*}
-		&= [3,2,1] \tim 1 \\
-		&= (\la c. \la n . c3(c2(c 1 n)) \tim ) 1 \\
-		&= (\la n . c3(c2(c 1 n)) [\tim / c ] ) 1 \\
-		&\equals (\la n . \tim 3(\tim 2(\tim 1 n))) 1 \\
-		&= \tim 3(\tim 2(\tim 1 n)) [1/n] \\
-		&\equals \tim 3(\tim 2(\tim 1 1)) \\
-		&\equals \tim 3(\tim 2(1 \times 1)) \\
-		&= \tim 3(\tim 2(1)) \\
-		&\equals \tim 3(2 \times 1) \\
-		&= \tim 3(2) \\
-		&\equals 3 \times 2 \\
+		&= [3,2,1] \ \tim \ 1 \\
+		&= (\la c. \la n . \ c \ 3 \ (c \ 2 \ (c \ 1 \ n)) \ \tim ) \ 1 \\
+		&= (\la n . \ c \ 3 \ (c \ 2 \ (c \ 1 \ n)) \ [\tim \ / \ c ]) \ 1 \\
+		&\equals (\la n . \ \tim \ 3 \ (\tim \ 2 \ (\tim \ 1 \ n))) \ 1 \\
+		&= \tim \ 3 \ (\tim \ 2 \ (\tim \ 1 \ n)) \ [1 \ / \ n] \\
+		&\equals \tim \ 3 \ (\tim \ 2 \ (\tim \ 1 \ 1)) \\
+		&\rightarrow \tim \ 3(\tim \ 2 \ (1 \times 1)) \\
+		&= \tim \ 3 \ (\tim \ 2 \ (1)) \\
+		&\rightarrow \tim \ 3 \ (2 \times 1) \\
+		&= \tim \ 3 \ (2) \\
+		&\rightarrow 3 \times 2 \\
 		&= 6
 	\end{align*}
 	
