@@ -1,6 +1,7 @@
 \documentclass{article}
 
 \usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
 
 \title{CM20256 - Coursework 2}
 \date{02/05/2017}
@@ -19,6 +20,11 @@
 	\pagenumbering{gobble}
 	\maketitle
 	\newpage
+	
+	\pagenumbering{gobble}
+	\tableofcontents
+	\newpage
+	
 	\pagenumbering{arabic}
 	
 	% _________________________________ PART1 __________________________________
@@ -26,20 +32,24 @@
 	\section{Part 1 (10\%)}
 	\textbf{Show that the term \textit{``[3,2,1] times 1''} $\beta$-reduces to 6:}
 
-	\begin{align*}
-		&= [3,2,1] \ \tim \ 1 \\
-		&= (\la c. \la n . \ c \ 3 \ (c \ 2 \ (c \ 1 \ n)) \ \tim ) \ 1 \\
-		&= (\la n . \ c \ 3 \ (c \ 2 \ (c \ 1 \ n)) \ [\tim \ / \ c ]) \ 1 \\
-		&\equals (\la n . \ \tim \ 3 \ (\tim \ 2 \ (\tim \ 1 \ n))) \ 1 \\
-		&= \tim \ 3 \ (\tim \ 2 \ (\tim \ 1 \ n)) \ [1 \ / \ n] \\
-		&\equals \tim \ 3 \ (\tim \ 2 \ (\tim \ 1 \ 1)) \\
-		&\rightarrow \tim \ 3(\tim \ 2 \ (1 \times 1)) \\
-		&= \tim \ 3 \ (\tim \ 2 \ (1)) \\
-		&\rightarrow \tim \ 3 \ (2 \times 1) \\
-		&= \tim \ 3 \ (2) \\
-		&\rightarrow 3 \times 2 \\
-		&= 6
-	\end{align*}
+	\begin{Large}
+		\begin{align*}
+			&= [3,2,1] \ \tim \ 1 \\
+			&= (\la c. \la n . \ c \ 3 \ (c \ 2 \ (c \ 1 \ n)) \ \tim ) \ 1 \\
+			&= (\la n . \ c \ 3 \ (c \ 2 \ (c \ 1 \ n)) \ [\tim \ / \ c ]) \ 1 \\
+			&\equals (\la n . \ \tim \ 3 \ (\tim \ 2 \ (\tim \ 1 \ n))) \ 1 \\
+			&= \tim \ 3 \ (\tim \ 2 \ (\tim \ 1 \ n)) \ [1 \ / \ n] \\
+			&\equals \tim \ 3 \ (\tim \ 2 \ (\tim \ 1 \ 1)) \\
+			&\rightarrow \tim \ 3(\tim \ 2 \ (1 \times 1)) \\
+			&= \tim \ 3 \ (\tim \ 2 \ (1)) \\
+			&\rightarrow \tim \ 3 \ (2 \times 1) \\
+			&= \tim \ 3 \ (2) \\
+			&\rightarrow 3 \times 2 \\
+			&= 6
+		\end{align*}
+	\end{Large}
+	
+	\newpage
 	
 	% _________________________________ PART 2 _________________________________
 	
@@ -47,20 +57,22 @@
 	\section{Part 2 (15\%)}
 	\textbf{Reduce \textit{``cons 3 [2,1]''} to \textit{``[3,2,1]''}:}
 	
-	\begin{align*}
-		&= cons \ 3 \ [2,1]  \\
-		&= (((\la x.\la l.\la c.\la n \ c \ x \ (l \ c \ n))\ 3) \ [2,1] \\
-		&= (\la l.\la c.\la n \ c \ x \ (l \ c \ n) \ [3 \ / \ x] \ ) \ [2,1] \\
-		&\equals (\la l.\la c.\la n \ c \ 3 \ (l \ c \ n)) \ [2,1] \\
-		&= \la c.\la n \ c \ 3 \ (l \ c \ n) \ [ \ [2,1] / l \ ] \\
-		&\equals \la c.\la n \ c \ 3 \ ([2,1] \ c \ n) \\
-		&= \la c.\la n \ c \ 3 \ (\la c.\la n. \ c \ 2 \ (c \ 1 \ n) \ c \ n) \\
-		&= \la c.\la n \ c \ 3 \ (\la n. \ c \ 2 \ (c \ 1 \ n) \ [c \ / \ c] \ n) \\
-		&\equals \la c.\la n \ c \ 3 \ (\la n. \ c \ 2 \ (c \ 1 \ n) \ n) \\
-		&= \la c.\la n \ c \ 3 \ ( c \ 2 \ (c \ 1 \ n) \ [n \ / \ n]) \\
-		&\equals \la c.\la n \ c \ 3 \ ( c \ 2 \ (c \ 1 \ n)) \\
-		&= [3,2,1]
-	\end{align*}
+	\begin{Large}
+		\begin{align*}
+			&= cons \ 3 \ [2,1]  \\
+			&= (((\la x.\la l.\la c.\la n \ c \ x \ (l \ c \ n))\ 3) \ [2,1] \\
+			&= (\la l.\la c.\la n \ c \ x \ (l \ c \ n) \ [3 \ / \ x] \ ) \ [2,1] \\
+			&\equals (\la l.\la c.\la n \ c \ 3 \ (l \ c \ n)) \ [2,1] \\
+			&= \la c.\la n \ c \ 3 \ (l \ c \ n) \ [ \ [2,1] / l \ ] \\
+			&\equals \la c.\la n \ c \ 3 \ ([2,1] \ c \ n) \\
+			&= \la c.\la n \ c \ 3 \ (\la c.\la n. \ c \ 2 \ (c \ 1 \ n) \ c \ n) \\
+			&= \la c.\la n \ c \ 3 \ (\la n. \ c \ 2 \ (c \ 1 \ n) \ [c \ / \ c] \ n) \\
+			&\equals \la c.\la n \ c \ 3 \ (\la n. \ c \ 2 \ (c \ 1 \ n) \ n) \\
+			&= \la c.\la n \ c \ 3 \ ( c \ 2 \ (c \ 1 \ n) \ [n \ / \ n]) \\
+			&\equals \la c.\la n \ c \ 3 \ ( c \ 2 \ (c \ 1 \ n)) \\
+			&= [3,2,1]
+		\end{align*}
+	\end{Large}
 	
 	% _________________________________ PART 3 _________________________________
 	
