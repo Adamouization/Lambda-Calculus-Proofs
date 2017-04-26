@@ -2,20 +2,28 @@
 
 \usepackage{amsmath}
 \usepackage[margin=1in]{geometry}
+\usepackage{amssymb}
 
 \title{CM20256 - Coursework 2}
 \date{02/05/2017}
 \author{Adam Jaamour (aj645)}
 
+% _________________________________ DOCUMENT __________________________________
+
 \begin{document}
+
+	% _________________________________ SETUP __________________________________
 
 	\newcommand{\lamb}{$\lambda$}
 	\newcommand{\la}{\lambda}
 	\newcommand{\be}{$\beta$}
-	\newcommand{\tim}{\text{times}}
+	
 	\newcommand{\sa}{\quad}
+	
 	\newcommand{\equals}{\rightarrow_\beta}
 	\newcommand{\equalsT}{\sa \rightarrow_\beta^*\sa}
+	
+	\newcommand{\tim}{\text{times}}
 	
 	\pagenumbering{gobble}
 	\maketitle
@@ -30,9 +38,9 @@
 	% _________________________________ PART1 __________________________________
 	
 	\section{Part 1 (10\%)}
-	\textbf{Show that the term \textit{``[3,2,1] times 1''} $\beta$-reduces to 6:}
 
 	\begin{Large}
+		\textbf{Show that the term \textit{``[3,2,1] times 1''} $\beta$-reduces to 6:}
 		\begin{align*}
 			&= [3,2,1] \ \tim \ 1 \\
 			&= (\la c. \la n . \ c \ 3 \ (c \ 2 \ (c \ 1 \ n)) \ \tim ) \ 1 \\
@@ -47,17 +55,17 @@
 			&\rightarrow 3 \times 2 \\
 			&= 6
 		\end{align*}
+		``$\tim \ m \ n \ \rightarrow n \times m$'' was used for this part.
 	\end{Large}
-	
 	\newpage
 	
+	
 	% _________________________________ PART 2 _________________________________
-	
-	
+		
 	\section{Part 2 (15\%)}
-	\textbf{Reduce \textit{``cons 3 [2,1]''} to \textit{``[3,2,1]''}:}
 	
 	\begin{Large}
+		\textbf{Reduce \textit{``cons 3 [2,1]''} to \textit{``[3,2,1]''}:}
 		\begin{align*}
 			&= cons \ 3 \ [2,1]  \\
 			&= (((\la x.\la l.\la c.\la n \ c \ x \ (l \ c \ n))\ 3) \ [2,1] \\
@@ -72,61 +80,75 @@
 			&\equals \la c.\la n \ c \ 3 \ ( c \ 2 \ (c \ 1 \ n)) \\
 			&= [3,2,1]
 		\end{align*}
+		``$cons \triangleq \la x.\la .l.\la x.\la n. \ c \ x \ (l \ c \ n)$'' was used for this part.
 	\end{Large}
+	\newpage
+	
 	
 	% _________________________________ PART 3 _________________________________
 	
 	\section{Part 3 (15\%)}
 	\textbf{Define terms ``head'' and ``empty'' such that:}
 	
-	\begin{align*}
-		head \sa [ N, ...] &\equalsT  N\\
-		empty \sa [\sa] &\equalsT true\\
-		head \sa [ N, ...] &\equalsT false
-	\end{align*}
-	
-	answer here
-	
+	\begin{Large}
+		\begin{align*}
+			head \sa [ N, ...] &\equalsT  N\\
+			empty \sa [\sa] &\equalsT true\\
+			head \sa [ N, ...] &\equalsT false
+		\end{align*}
+		answer here
+	\end{Large}
+	\newpage
+
+
 	% _________________________________ PART 4 _________________________________
 	
 	\section{Part 4 (35\%)}
 
-	\textbf{What does $L_m$ = \lamb c.\lamb n.$L'_m$ (for any m) represent?}\\
+	\begin{Large}
+		\textbf{What does $L_m$ = \lamb c.\lamb n.$L'_m$ (for any m) represent?}\\
+		
+		answer here
+		\newline
+		
+		\textbf{Prove by induction on $m$ that $L'_m$ [ times/c , 1/n ] $\equals^*$  m!}\\
+		
+		answer here
+		\newline
+		
+		\textbf{Based on previous answer, show that $L_m$ times 1  $\equals^*$ m!}\\
+		
+		answer here
+	\end{Large}
+	\newpage
 	
-	answer here
-	\newline
-	
-	\textbf{Prove by induction on $m$ that $L'_m$ [ times/c , 1/n ] $>$\be \quad m!}\\
-	
-	answer here
-	\newline
-	
-	\textbf{Based on previous answer, show that $L_m$ times 1  $>$\be \quad m!}\\
-	
-	answer here
 	
 	% _________________________________ PART 5 _________________________________
 	
 	\section{Part 5 (25\%)}
 	
-	\textbf{Give a \lamb term corresponding to Haskell function \textit{foldr} such as:}\\
-	
-	\begin{equation*}
-		foldr  f  u [N_1,...,N_k] \equalsT f N_1(f N_2(...(f N_k u)))
-	\end{equation*}
-	
-	answer here\\
-	
-	\textbf{Give a \lamb term corresponding to Haskell function \textit{map} such as:}\\
-	
-	\begin{equation*}
-		map  f [N_1,...,N_k] \equalsT [f N_1,f N_2,...,f N_k]
-	\end{equation*}
-	
-	answer here\\
-	
-	\textbf{Give a \lamb term corresponding to infinite list $[0,1,2,...]$:}\\
-	
-	answer here
+	\begin{Large}
+		\textbf{Give a \lamb term corresponding to Haskell function \textit{foldr} such as:}\\
+		
+		\begin{equation*}
+			foldr \ f \ u \ [N_1 \ ,..., \ N_k] \equalsT f \ N_1\ (f \ N_2 \ ( \ ... \ (f \ N_k \ u)))
+		\end{equation*}
+		\newline
+		
+		answer here\\
+		
+		\textbf{Give a \lamb term corresponding to Haskell function \textit{map} such as:}\\
+		
+		\begin{equation*}
+			map \ f \ [N_1\ ,..., \ N_k] \equalsT [f \ N_1 \ , f \ N_2 \ ,...,f \ N_k]
+		\end{equation*}
+		\newline
+		
+		answer here\\
+		
+		\textbf{Give a \lamb term corresponding to infinite list $[0,1,2,...]$:}\\
+		
+		answer here
+	\end{Large}
 
 \end{document}
