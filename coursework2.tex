@@ -13,7 +13,7 @@
 	\newcommand{\be}{$\beta$}
 	\newcommand{\tim}{\text{times}}
 	\newcommand{\sa}{\quad}
-	\newcommand{\equals}{\rightarrow_\beta^*}
+	\newcommand{\equals}{\rightarrow_\beta}
 	\newcommand{\equalsT}{\sa \rightarrow_\beta^*\sa}
 	
 	\pagenumbering{gobble}
@@ -47,7 +47,20 @@
 	\section{Part 2 (15\%)}
 	\textbf{Reduce \textit{``cons 3 [2,1]''} to \textit{``[3,2,1]''}:}
 	
-	answer here
+	\begin{align*}
+		&= cons \ 3 \ [2,1]  \\
+		&= (((\la x.\la l.\la c.\la n \ c \ x \ (l \ c \ n))\ 3) \ [2,1] \\
+		&= (\la l.\la c.\la n \ c \ x \ (l \ c \ n) \ [3 \ / \ x] \ ) \ [2,1] \\
+		&\equals (\la l.\la c.\la n \ c \ 3 \ (l \ c \ n)) \ [2,1] \\
+		&= \la c.\la n \ c \ 3 \ (l \ c \ n) \ [ \ [2,1] / l \ ] \\
+		&\equals \la c.\la n \ c \ 3 \ ([2,1] \ c \ n) \\
+		&= \la c.\la n \ c \ 3 \ (\la c.\la n. \ c \ 2 \ (c \ 1 \ n) \ c \ n) \\
+		&= \la c.\la n \ c \ 3 \ (\la n. \ c \ 2 \ (c \ 1 \ n) \ [c \ / \ c] \ n) \\
+		&\equals \la c.\la n \ c \ 3 \ (\la n. \ c \ 2 \ (c \ 1 \ n) \ n) \\
+		&= \la c.\la n \ c \ 3 \ ( c \ 2 \ (c \ 1 \ n) \ [n \ / \ n]) \\
+		&\equals \la c.\la n \ c \ 3 \ ( c \ 2 \ (c \ 1 \ n)) \\
+		&= [3,2,1]
+	\end{align*}
 	
 	% _________________________________ PART 3 _________________________________
 	
