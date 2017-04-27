@@ -1,14 +1,14 @@
 \documentclass{article}
 
 \usepackage{amsmath}
-\usepackage[margin=1in]{geometry}
 \usepackage{amssymb}
+\usepackage[margin=1in]{geometry}
 
 \title{CM20256 - Coursework 2}
 \date{02/05/2017}
 \author{Adam Jaamour (aj645)}
 
-% _________________________________ DOCUMENT __________________________________
+% ____________________________________ DOCUMENT _____________________________________
 
 \begin{document}
 
@@ -65,8 +65,6 @@
 		
 	\section{Part 2 (15\%)}
 	
-	add alpha reduction for list
-	
 	\begin{Large}
 		\textbf{Reduce \textit{``cons 3 [2,1]''} to \textit{``[3,2,1]''}:}
 		\begin{align*}
@@ -91,15 +89,51 @@
 	% _________________________________ PART 3 _________________________________
 	
 	\section{Part 3 (15\%)}
-	\textbf{Define terms ``head'' and ``empty'' such that:}
-	
+
 	\begin{Large}
+		\textbf{Define terms \textit{``head''} and \textit{``empty''} such that:}
+			\begin{align*}
+				head \sa [ N, ...] &\equalsT  N\\
+				empty \sa [\sa] &\equalsT true\\
+				head \sa [ N, ...] &\equalsT false
+			\end{align*}
+		
+		The \lamb -term for \textit{``head''} found is:
+		\begin{LARGE}
+			\begin{equation*}
+				head \triangleq \la l.l \ (\la .x.\la y.x) \ n
+			\end{equation*}
+		\end{LARGE}
+		
+		The \lamb -term for \textit{``empty''} found is:
+		\begin{LARGE}
+			\begin{equation*}
+				empty \triangleq \la l.l \ (\la .a.\la b.false) \ true
+			\end{equation*}
+		\end{LARGE}
+		
+		Examples using the \lamb -terms found:
+		
 		\begin{align*}
-			head \sa [ N, ...] &\equalsT  N\\
-			empty \sa [\sa] &\equalsT true\\
-			head \sa [ N, ...] &\equalsT false
+			head \ [2,1] &\triangleq (\la l.l \ (\la .x.\la y.x) \ n) \ \la c.\la n. \ c \ 2 \ (c \ 1 \ n)
 		\end{align*}
-		answer here
+		
+		\begin{align*}
+			empty \ [ \ ] &\triangleq (\la l.l \ (\la .a.\la b.false) \ true) \ \la c.\la n.n \\
+			&= (l \ (\la .a.\la b.false) \ true) \ [\la c.\la n.n \ / \ l] \\
+			&\equals \la c.\la n.n \ (\la .a.\la b.false) \ true \\
+			&= \la n.n \ [\la .a.\la b.false \ / \ c] \ true \\
+			&\equals (\la n.n) \ true \\
+			&= n \ [true \ / \ n] \\
+			&\equals true
+		\end{align*}
+		
+		\begin{align*}
+			empty \ [1,2] &\triangleq (\la l.l \ (\la .a.\la b.false) \ true) \ \la c.\la n. \ c \ 2 \ (c \ 1 \ n)
+		\end{align*}
+		
+		``$ \ [ \ ] \ = \ \la c.\la n.n$'' , where $[ \ ]$ is the empty list, was used for this part.
+		
 	\end{Large}
 	\newpage
 
@@ -111,17 +145,65 @@
 	\begin{Large}
 		\textbf{What does $L_m$ = \lamb c.\lamb n.$L'_m$ (for any m) represent?}\\
 		
-		answer here
+		The list represented by the term $L_m$ corresponds to the list of descending natural numbers from $m$ to $1$, excluding 0, such as m $\in \ \mathbb{Z}^*$.
 		\newline
 		
+		Proof by example, using $m \ = \ 4$:
+		\begin{align*}
+			L_4 &= \la c.\la n. \ L_4^\prime \\
+			&= \la c.\la n. \ c \  4 \ ( L_3^\prime ) \\
+			&= \la c.\la n. \ c \  4 \ ( c \ 3 \ (L_2^\prime )) \\
+			&= \la c.\la n. \ c \  4 \ ( c \ 3 \ (c \ 2 \ (L_1^\prime ))) \\
+			&= \la c.\la n. \ c \  4 \ ( c \ 3 \ (c \ 2 \ (c \ 1 \ (L_0^\prime )))) \\
+			&= \la c.\la n. \ c \  4 \ ( c \ 3 \ (c \ 2 \ (c \ 1 \ n))) \\
+			&= [5,4,3,2,1]
+		\end{align*}
+		\newline
+
 		\textbf{Prove by induction on $m$ that $L'_m$ [ times/c , 1/n ] $\equals^*$  m!}\\
 		
-		answer here
+		\underline{Base case}: $m=0$
+		\begin{align*}
+			L_0^\prime \ [\ \tim / c \ , \ 1/n \ ] &= \saq n \ [\ \tim / c \ , \ 1/n \ ] \\
+			&\equals 1
+		\end{align*}
+		
+		Since $0! = 1$, the base case is therefore true.
 		\newline
 		
-		\textbf{Based on previous answer, show that $L_m$ times 1  $\equals^*$ m!}\\
+		\underline{Inductive case}: \\
 		
-		answer here
+		The inductive hypothesis is $L'_m$ [ times/c , 1/n ] $\equals^*$  m!, and it is assumed to be true.
+		If it can be proved with $m+1$, then $L'_m$ [ times/c , 1/n ] $\equals^*$  m! will be true for all $m$.
+		
+		For $m+1$:
+		\begin{align*}
+			&L_{m+1}^\prime \ [\ \tim / c \ , \ 1/n \ ] \\
+			&= \saq (c \ (m+1) \ L_{m-1+1}^\prime ) \ [\ \tim / c \ , \ 1/n \ ] \\
+			&\equals \tim \ (m+1) \ ( L_m^\prime \ [\ \tim / c \ , \ 1/n \ ]) \\
+			&= \saq \tim \ (m+1) \ m! \\
+			&\rightarrow \: \, (m+1) \times  m! \\
+			&= \saq (m+1)!
+		\end{align*}
+		
+		On the second line of solution, $L_m^\prime \ [\ \tim / c \ , \ 1/n \ ]$ is substitued with $m!$ throughout the inductive hypothesis. \\
+		
+		``$\tim \ m \ n \ \rightarrow n \times m$'' was also used for this part. \\
+		
+		True for $m+1$, therefore $L'_m$ [ times/c , 1/n ] $\equals^*$ is true for all $m$. \\
+		\newline
+		
+		\textbf{Based on previous answer, prove that $L_m$ times 1  $\equals^*$ m!}
+		
+		\begin{align*}
+			&L_m^\prime \ \tim \ 1 \\
+			&= \, (\la c.\la n. \ L_m^\prime \ \tim) \ 1 \\
+			&\rightarrow \la n. \ L_m^\prime \ [\tim \ / \ c] \ 1 \\
+			&\rightarrow L_m^\prime \ [\tim /c \ , \ 1/n] \\
+			&= \, m!
+		\end{align*}
+		
+		Previous proof that $L'_m$ [ times/c , 1/n ] $\equals^*$  m! used to find $m!$
 	\end{Large}
 	\newpage
 	
@@ -131,7 +213,7 @@
 	\section{Part 5 (25\%)}
 	
 	\begin{Large}
-		\textbf{Give a \lamb term corresponding to Haskell function \textit{foldr} such as:}\\
+		\textbf{Give a \lamb -term corresponding to Haskell function \textit{foldr} such as:}\\
 		
 		\begin{equation*}
 			foldr \ f \ u \ [N_1 \ ,..., \ N_k] \equalsT f \ N_1\ (f \ N_2 \ ( \ ... \ (f \ N_k \ u)))
@@ -140,7 +222,7 @@
 		
 		answer here\\
 		
-		\textbf{Give a \lamb term corresponding to Haskell function \textit{map} such as:}\\
+		\textbf{Give a \lamb -term corresponding to Haskell function \textit{map} such as:}\\
 		
 		\begin{equation*}
 			map \ f \ [N_1\ ,..., \ N_k] \equalsT [f \ N_1 \ , f \ N_2 \ ,...,f \ N_k]
@@ -149,9 +231,23 @@
 		
 		answer here\\
 		
-		\textbf{Give a \lamb term corresponding to infinite list $[0,1,2,...]$:}\\
+		\textbf{Give a \lamb -term corresponding to infinite list $[0,1,2,...]$:}\\
 		
 		answer here
+	\end{Large}
+	
+	% _________________________________ TODO _________________________________
+	
+	\newpage
+	
+	\section{ToDo}
+	
+	\begin{Large}
+		underline redexes\\
+		
+		check all equal, rightarrow, beta reductions and alpha reductions are correctly placed\\
+		
+		part 2: add alpha reduction for list\\
 	\end{Large}
 
 \end{document}
