@@ -19,6 +19,7 @@
 	\newcommand{\be}{$\beta$}
 	
 	\newcommand{\sa}{\quad}
+	\newcommand{\saq}{\, \, \, \,}	
 	
 	\newcommand{\equals}{\rightarrow_\beta}
 	\newcommand{\equalsT}{\sa \rightarrow_\beta^*\sa}
@@ -42,18 +43,18 @@
 	\begin{Large}
 		\textbf{Show that the term \textit{``[3,2,1] times 1''} $\beta$-reduces to 6:}
 		\begin{align*}
-			&= [3,2,1] \ \tim \ 1 \\
-			&= (\la c. \la n . \ c \ 3 \ (c \ 2 \ (c \ 1 \ n)) \ \tim ) \ 1 \\
-			&= (\la n . \ c \ 3 \ (c \ 2 \ (c \ 1 \ n)) \ [\tim \ / \ c ]) \ 1 \\
+			&= \saq [3,2,1] \ \tim \ 1 \\
+			&= \saq (\la c. \la n . \ c \ 3 \ (c \ 2 \ (c \ 1 \ n)) \ \tim ) \ 1 \\
+			&= \saq (\la n . \ c \ 3 \ (c \ 2 \ (c \ 1 \ n)) \ [\tim \ / \ c ]) \ 1 \\
 			&\equals (\la n . \ \tim \ 3 \ (\tim \ 2 \ (\tim \ 1 \ n))) \ 1 \\
-			&= \tim \ 3 \ (\tim \ 2 \ (\tim \ 1 \ n)) \ [1 \ / \ n] \\
+			&= \saq \tim \ 3 \ (\tim \ 2 \ (\tim \ 1 \ n)) \ [1 \ / \ n] \\
 			&\equals \tim \ 3 \ (\tim \ 2 \ (\tim \ 1 \ 1)) \\
-			&\rightarrow \tim \ 3(\tim \ 2 \ (1 \times 1)) \\
-			&= \tim \ 3 \ (\tim \ 2 \ (1)) \\
-			&\rightarrow \tim \ 3 \ (2 \times 1) \\
-			&= \tim \ 3 \ (2) \\
-			&\rightarrow 3 \times 2 \\
-			&= 6
+			&\rightarrow \: \, \tim \ 3(\tim \ 2 \ (1 \times 1)) \\
+			&= \saq \tim \ 3 \ (\tim \ 2 \ (1)) \\
+			&\rightarrow \: \, \tim \ 3 \ (2 \times 1) \\
+			&= \saq \tim \ 3 \ (2) \\
+			&\rightarrow \: \, 3 \times 2 \\
+			&= \saq 6
 		\end{align*}
 		``$\tim \ m \ n \ \rightarrow n \times m$'' was used for this part.
 	\end{Large}
@@ -64,21 +65,23 @@
 		
 	\section{Part 2 (15\%)}
 	
+	add alpha reduction for list
+	
 	\begin{Large}
 		\textbf{Reduce \textit{``cons 3 [2,1]''} to \textit{``[3,2,1]''}:}
 		\begin{align*}
-			&= cons \ 3 \ [2,1]  \\
-			&= (((\la x.\la l.\la c.\la n \ c \ x \ (l \ c \ n))\ 3) \ [2,1] \\
-			&= (\la l.\la c.\la n \ c \ x \ (l \ c \ n) \ [3 \ / \ x] \ ) \ [2,1] \\
+			&= \saq cons \ 3 \ [2,1]  \\
+			&= \saq (((\la x.\la l.\la c.\la n \ c \ x \ (l \ c \ n))\ 3) \ [2,1] \\
+			&= \saq (\la l.\la c.\la n \ c \ x \ (l \ c \ n) \ [3 \ / \ x] \ ) \ [2,1] \\
 			&\equals (\la l.\la c.\la n \ c \ 3 \ (l \ c \ n)) \ [2,1] \\
-			&= \la c.\la n \ c \ 3 \ (l \ c \ n) \ [ \ [2,1] / l \ ] \\
+			&= \saq \la c.\la n \ c \ 3 \ (l \ c \ n) \ [ \ [2,1] / l \ ] \\
 			&\equals \la c.\la n \ c \ 3 \ ([2,1] \ c \ n) \\
-			&= \la c.\la n \ c \ 3 \ (\la c.\la n. \ c \ 2 \ (c \ 1 \ n) \ c \ n) \\
-			&= \la c.\la n \ c \ 3 \ (\la n. \ c \ 2 \ (c \ 1 \ n) \ [c \ / \ c] \ n) \\
+			&= \saq \la c.\la n \ c \ 3 \ (\la c.\la n. \ c \ 2 \ (c \ 1 \ n) \ c \ n) \\
+			&= \saq \la c.\la n \ c \ 3 \ (\la n. \ c \ 2 \ (c \ 1 \ n) \ [c \ / \ c] \ n) \\
 			&\equals \la c.\la n \ c \ 3 \ (\la n. \ c \ 2 \ (c \ 1 \ n) \ n) \\
-			&= \la c.\la n \ c \ 3 \ ( c \ 2 \ (c \ 1 \ n) \ [n \ / \ n]) \\
+			&= \saq \la c.\la n \ c \ 3 \ ( c \ 2 \ (c \ 1 \ n) \ [n \ / \ n]) \\
 			&\equals \la c.\la n \ c \ 3 \ ( c \ 2 \ (c \ 1 \ n)) \\
-			&= [3,2,1]
+			&= \saq [3,2,1]
 		\end{align*}
 		``$cons \triangleq \la x.\la .l.\la x.\la n. \ c \ x \ (l \ c \ n)$'' was used for this part.
 	\end{Large}
