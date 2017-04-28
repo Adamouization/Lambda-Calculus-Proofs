@@ -46,22 +46,27 @@
 	\section{Part 1 (10\%)}
 
 	\begin{Large}
+	
 		\textbf{Show that the term \textit{``[3,2,1] times 1''} $\beta$-reduces to 6:}
+		
 		\begin{align*}
 			&= \saq [3,2,1] \ \tim \ 1 \\
 			&= \saq (\la c. \la n . \ c \ 3 \ (c \ 2 \ (c \ 1 \ n)) \ \tim ) \ 1 \\
-			&= \saq (\la n . \ c \ 3 \ (c \ 2 \ (c \ 1 \ n)) \ [\tim \ / \ c ]) \ 1 \\
+			&= \saq (\la n . \ c \ 3 \ (c \ 2 \ (c \ 1 \ n)) \ [\tim /c ]) \ 1 \\
 			&\equals (\la n . \ \tim \ 3 \ (\tim \ 2 \ (\tim \ 1 \ n))) \ 1 \\
-			&= \saq \tim \ 3 \ (\tim \ 2 \ (\tim \ 1 \ n)) \ [1 \ / \ n] \\
+			&= \saq \tim \ 3 \ (\tim \ 2 \ (\tim \ 1 \ n)) \ [1/n] \\
 			&\equals \tim \ 3 \ (\tim \ 2 \ (\tim \ 1 \ 1)) \\
-			&\rightarrow \: \, \tim \ 3(\tim \ 2 \ (1 \times 1)) \\
+			&\equals \tim \ 3 \ (\tim \ 2 \ (1 \times 1)) \\
 			&= \saq \tim \ 3 \ (\tim \ 2 \ (1)) \\
-			&\rightarrow \: \, \tim \ 3 \ (2 \times 1) \\
+			&\equals \tim \ 3 \ (2 \times 1) \\
 			&= \saq \tim \ 3 \ (2) \\
-			&\rightarrow \: \, 3 \times 2 \\
+			&\equals 3 \times 2 \\
 			&= \saq 6
 		\end{align*}
-		``$\tim \ m \ n \ \rightarrow n \times m$'' was used for this part.
+		\newline
+		
+		``$\tim \ m \ n \ \equals n \times m$'' was used for this part.
+		
 	\end{Large}
 	\newpage
 	
@@ -71,22 +76,26 @@
 	\section{Part 2 (15\%)}
 	
 	\begin{Large}
+	
 		\textbf{Reduce \textit{``cons 3 [2,1]''} to \textit{``[3,2,1]''}:}
+		
 		\begin{align*}
-			&= \saq cons \ 3 \ [2,1]  \\
-			&= \saq (((\la x.\la l.\la c.\la n \ c \ x \ (l \ c \ n))\ 3) \ [2,1] \\
-			&= \saq (\la l.\la c.\la n \ c \ x \ (l \ c \ n) \ [3 \ / \ x] \ ) \ [2,1] \\
+			cons \ 3 \ [2,1] \saq &= \saq (((\la x.\la l.\la c.\la n \ c \ x \ (l \ c \ n))\ 3) \ [2,1] \\
+			&= \saq (\la l.\la c.\la n \ c \ x \ (l \ c \ n) \ [3/x] \ ) \ [2,1] \\
 			&\equals (\la l.\la c.\la n \ c \ 3 \ (l \ c \ n)) \ [2,1] \\
 			&= \saq \la c.\la n \ c \ 3 \ (l \ c \ n) \ [ \ [2,1] / l \ ] \\
 			&\equals \la c.\la n \ c \ 3 \ ([2,1] \ c \ n) \\
-			&= \saq \la c.\la n \ c \ 3 \ (\la c.\la n. \ c \ 2 \ (c \ 1 \ n) \ c \ n) \\
-			&= \saq \la c.\la n \ c \ 3 \ (\la n. \ c \ 2 \ (c \ 1 \ n) \ [c \ / \ c] \ n) \\
-			&\equals \la c.\la n \ c \ 3 \ (\la n. \ c \ 2 \ (c \ 1 \ n) \ n) \\
-			&= \saq \la c.\la n \ c \ 3 \ ( c \ 2 \ (c \ 1 \ n) \ [n \ / \ n]) \\
+			&\equiv_\alpha \, \, \la c.\la n \ c \ 3 \ (\la d.\la m. \ d \ 2 \ (d \ 1 \ m) \ c \ n) \\
+			&= \saq \la c.\la n \ c \ 3 \ (\la m. \ d \ 2 \ (d \ 1 \ m) \ [c/d] \ n) \\
+			&\equals \la c.\la n \ c \ 3 \ (\la m. \ c \ 2 \ (c \ 1 \ m) \ n) \\
+			&= \saq \la c.\la n \ c \ 3 \ ( c \ 2 \ (c \ 1 \ m) \ [n/m]) \\
 			&\equals \la c.\la n \ c \ 3 \ ( c \ 2 \ (c \ 1 \ n)) \\
 			&= \saq [3,2,1]
 		\end{align*}
+		\newline
+		
 		``$cons \triangleq \la x.\la .l.\la x.\la n. \ c \ x \ (l \ c \ n)$'' was used for this part.
+		
 	\end{Large}
 	\newpage
 	
@@ -96,11 +105,12 @@
 	\section{Part 3 (15\%)}
 
 	\begin{Large}
+	
 		\textbf{Define terms \textit{``head''} and \textit{``empty''} such that:}
 		\begin{align*}
 			head \sa [ N, ...] &\equalsT  N\\
 			empty \sa [\sa] &\equalsT true\\
-			head \sa [ N, ...] &\equalsT false
+			empty \sa [ N, ...] &\equalsT false
 		\end{align*}
 		\newline
 		
@@ -146,7 +156,7 @@
 		\end{align*}
 		
 		\begin{align*}
-			empty \ [1,2] &\triangleq \saq (\la l.l \ (\la .a.\la b.false) \ true) \ \la c.\la n. \ c \ 2 \ (c \ 1 \ n) \\
+			empty \ [2,1] &\triangleq \saq (\la l.l \ (\la .a.\la b.false) \ true) \ \la c.\la n. \ c \ 2 \ (c \ 1 \ n) \\
 			&= \saq (l \ (\la .a.\la b.false) \ true) \ [\la c.\la n. \ c \ 2 \ (c \ 1 \ n) \ / \ l] \\
 			&\equals (\la c.\la n. \ c \ 2 \ (c \ 1 \ n)) \ (\la .a.\la b.false) \ true \\
 			&= \saq (\la n. \ c \ 2 \ (c \ 1 \ n)) \ [\la .a.\la b.false \ / \ c] \ true \\
@@ -219,13 +229,13 @@
 			&= \saq (c \ (m+1) \ L_{m-1+1}^\prime ) \ [\ \tim / c \ , \ 1/n \ ] \\
 			&\equals \tim \ (m+1) \ ( L_m^\prime \ [\ \tim / c \ , \ 1/n \ ]) \\
 			&= \saq \tim \ (m+1) \ m! \\
-			&\rightarrow \: \, (m+1) \times  m! \\
+			&\equals (m+1) \times  m! \\
 			&= \saq (m+1)!
 		\end{align*}
 		
 		On the second line of solution, $L_m^\prime \ [\ \tim / c \ , \ 1/n \ ]$ is substitued with $m!$ throughout the inductive hypothesis. \\
 		
-		``$\tim \ m \ n \ \rightarrow n \times m$'' was also used for this part. \\
+		``$\tim \ m \ n \ \equals n \times m$'' was also used for this part. \\
 		
 		True for $m+1$, therefore $L'_m$ [ times/c , 1/n ] $\equals^*$ is true for all $m$. \\
 		\newline
@@ -233,11 +243,10 @@
 		\textbf{Based on previous answer, prove that $L_m$ times 1  $\equals^*$ m!}
 		
 		\begin{align*}
-			&L_m^\prime \ \tim \ 1 \\
-			&= \, (\la c.\la n. \ L_m^\prime \ \tim) \ 1 \\
-			&\rightarrow \la n. \ L_m^\prime \ [\tim \ / \ c] \ 1 \\
-			&\rightarrow L_m^\prime \ [\tim /c \ , \ 1/n] \\
-			&= \, m!
+			L_m^\prime \ \tim \ 1 &= (\la c.\la n. \ L_m^\prime \ \tim) \ 1 \\
+			&= \la n. \ L_m^\prime \ [\tim \ / \ c] \ 1 \\
+			&= L_m^\prime \ [\tim /c \ , \ 1/n] \\
+			&= m!
 		\end{align*}
 		
 		Previous proof that $L'_m$ [ times/c , 1/n ] $\equals^*$  m! used to find $m!$
@@ -282,15 +291,7 @@
 	\begin{Large}
 		underline redexes\\
 		
-		check all equal, rightarrow, beta reductions and alpha reductions are correctly placed\\
-		
-		part 2: add alpha reduction for list\\
-		
-		finish part 3\\
-		
 		complete part 5\\
-		
-		replace right arrows for (times m n = m x n) with beta reductionssd 
 	\end{Large}
 
 \end{document}
