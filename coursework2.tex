@@ -92,35 +92,37 @@
 
 	\begin{Large}
 		\textbf{Define terms \textit{``head''} and \textit{``empty''} such that:}
-			\begin{align*}
-				head \sa [ N, ...] &\equalsT  N\\
-				empty \sa [\sa] &\equalsT true\\
-				head \sa [ N, ...] &\equalsT false
-			\end{align*}
+		\begin{align*}
+			head \sa [ N, ...] &\equalsT  N\\
+			empty \sa [\sa] &\equalsT true\\
+			head \sa [ N, ...] &\equalsT false
+		\end{align*}
+		\newline
 		
-		The \lamb -term for \textit{``head''} found is:
+		The \lamb -term found for \textit{``head''} is:
 		\begin{equation*}
 			head \triangleq \la l.l \ (\la .x.\la y.x) \ n
 		\end{equation*}
 		
-		The \lamb -term for \textit{``empty''} found is:
+		The \lamb -term found for \textit{``empty''} is:
 		\begin{equation*}
 			empty \triangleq \la l.l \ (\la .a.\la b.false) \ true
 		\end{equation*}
+		\newline
 		
-		Examples using the \lamb -terms found:
+		Proof by example using the \lamb -terms found for  \textit{``head''} and \textit{``empty''}:
 		
 		\begin{align*}
 			head \ [2,1] &\triangleq (\la l.l \ (\la .x.\la y.x) \ n) \ \la c.\la n. \ c \ 2 \ (c \ 1 \ n)
 		\end{align*}
 		
 		\begin{align*}
-			empty \ [ \ ] &\triangleq (\la l.l \ (\la .a.\la b.false) \ true) \ \la c.\la n.n \\
-			&= (l \ (\la .a.\la b.false) \ true) \ [\la c.\la n.n \ / \ l] \\
+			empty \ [ \ ] &\triangleq \saq (\la l.l \ (\la .a.\la b.false) \ true) \ \la c.\la n.n \\
+			&= \saq (l \ (\la .a.\la b.false) \ true) \ [\la c.\la n.n \ / \ l] \\
 			&\equals \la c.\la n.n \ (\la .a.\la b.false) \ true \\
-			&= \la n.n \ [\la .a.\la b.false \ / \ c] \ true \\
+			&= \saq \la n.n \ [\la .a.\la b.false \ / \ c] \ true \\
 			&\equals (\la n.n) \ true \\
-			&= n \ [true \ / \ n] \\
+			&= \saq n \ [true \ / \ n] \\
 			&\equals true
 		\end{align*}
 		
