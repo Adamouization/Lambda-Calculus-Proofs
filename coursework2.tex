@@ -12,7 +12,7 @@
 
 \begin{document}
 
-	% _________________________________ SETUP __________________________________
+	% ________________________________ COMMANDS _________________________________
 
 	\newcommand{\lamb}{$\lambda$}
 	\newcommand{\la}{\lambda}
@@ -26,12 +26,17 @@
 	
 	\newcommand{\tim}{\text{times}}
 	
+	
+	% _______________________________ PRESENTATION ________________________________
+	
 	\pagenumbering{gobble}
 	\maketitle
 	\newpage
 	
 	\pagenumbering{gobble}
-	\tableofcontents
+	\begin{Large}
+		\tableofcontents
+	\end{Large}
 	\newpage
 	
 	\pagenumbering{arabic}
@@ -113,7 +118,21 @@
 		Proof by example using the \lamb -terms found for  \textit{``head''} and \textit{``empty''}:
 		
 		\begin{align*}
-			head \ [2,1] &\triangleq (\la l.l \ (\la .x.\la y.x) \ n) \ \la c.\la n. \ c \ 2 \ (c \ 1 \ n)
+			head \ [2,1] &\triangleq \saq (\la l.l \ (\la .x.\la y.x) \ n) \ \la c.\la n. \ c \ 2 \ (c \ 1 \ n) \\
+			&= \saq (l \ (\la .x.\la y.x) \ n) \ [\la c.\la n. \ c \ 2 \ (c \ 1 \ n) \ / \ l] \\
+			&\equals (\la c.\la n. \ c \ 2 \ (c \ 1 \ n)) \ (\la .x.\la y.x) \ n \\
+			&= \saq (\la n. \ c \ 2 \ (c \ 1 \ n) \ [\la .x.\la y.x \ / \ c] ) \ n \\
+			&\equals \la n.\ ((\la .x.\la y.x) \ 2) \ (((\la .x.\la y.x) \ 1) \ n) \ n \\
+			&= \saq (((\la .x.\la y.x) \ 2) \ (((\la .x.\la y.x) \ 1) \ n)) \ [n / n] \\
+			&\equals ((\la .x.\la y.x) \ 2) \ (((\la .x.\la y.x) \ 1) \ n) \\
+			&= \saq ((\la .x.\la y.x) \ 2) \ (\la y.x \ [1 / x] \ n) \\
+			&\equals ((\la .x.\la y.x) \ 2) \ ((\la y.1 ) \ n) \\
+			&= \saq ((\la .x.\la y.x) \ 2) \ (1 \ [n/y]) \\
+			&\equals ((\la .x.\la y.x) \ 2) \ 1 \\
+			&= \saq (\la y.x\ [2/x]) \ 1 \\
+			&\equals (\la y.2) \ 1 \\
+			&= \saq 2 \ [1/y] \\
+			&\equals 2
 		\end{align*}
 		
 		\begin{align*}
@@ -127,8 +146,23 @@
 		\end{align*}
 		
 		\begin{align*}
-			empty \ [1,2] &\triangleq (\la l.l \ (\la .a.\la b.false) \ true) \ \la c.\la n. \ c \ 2 \ (c \ 1 \ n)
+			empty \ [1,2] &\triangleq \saq (\la l.l \ (\la .a.\la b.false) \ true) \ \la c.\la n. \ c \ 2 \ (c \ 1 \ n) \\
+			&= \saq (l \ (\la .a.\la b.false) \ true) \ [\la c.\la n. \ c \ 2 \ (c \ 1 \ n) \ / \ l] \\
+			&\equals (\la c.\la n. \ c \ 2 \ (c \ 1 \ n)) \ (\la .a.\la b.false) \ true \\
+			&= \saq (\la n. \ c \ 2 \ (c \ 1 \ n)) \ [\la .a.\la b.false \ / \ c] \ true \\
+			&\equals (\la n. \ ((\la .a.\la b.false) \ 2) \ (((\la .a.\la b.false) \ 1) \ n)) \ true \\
+			&= \saq ((\la .a.\la b.false) \ 2) \ (((\la .a.\la b.false) \ 1) \ n \ [true/n]) \\
+			&\equals ((\la .a.\la b.false) \ 2) \ (((\la .a.\la b.false) \ 1) \ true) \\
+			&= \saq ((\la .a.\la b.false) \ 2) \ ((\la b.false \ [1/a]) \ true) \\
+			&\equals ((\la .a.\la b.false) \ 2) \ ((\la b.false) \ true) \\
+			&=\saq ((\la .a.\la b.false) \ 2) \ (false \ [true/b]) \\
+			&\equals ((\la .a.\la b.false) \ 2) \ false \\
+			&= \saq (\la b.false \ [2/a]) \ false \\
+			&\equals (\la b.false) \ false \\
+			&= \saq false \ [false/b] \\
+			&\equals false
 		\end{align*}
+		\newline
 		
 		``$ \ [ \ ] \ = \ \la c.\la n.n$'' , where $[ \ ]$ is the empty list, was used for this part.
 		
@@ -255,6 +289,8 @@
 		finish part 3\\
 		
 		complete part 5\\
+		
+		replace right arrows for (times m n = m x n) with beta reductionssd 
 	\end{Large}
 
 \end{document}
