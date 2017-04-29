@@ -259,23 +259,118 @@
 	\section{Part 5 (25\%)}
 	
 	\begin{Large}
-		\textbf{Give a \lamb -term corresponding to Haskell function \textit{foldr} such as:}\\
+	\subsection{foldr}
+		\textbf{Give a \lamb -term corresponding to Haskell function \textit{foldr} such as:}
 		
 		\begin{equation*}
 			foldr \ f \ u \ [N_1 \ ,..., \ N_k] \equalsT f \ N_1\ (f \ N_2 \ ( \ ... \ (f \ N_k \ u)))
 		\end{equation*}
 		\newline
 		
-		answer here\\
+		The \lamb -term found for \textit{``foldr''} is:
+		\begin{equation*}
+			foldr \triangleq \la a.\la b.\la l.(l \ a \ b)
+		\end{equation*}
+		\newline
 		
-		\textbf{Give a \lamb -term corresponding to Haskell function \textit{map} such as:}\\
+		Proof by example using the \lamb -terms found for  \textit{``foldr''}:\\
+		
+		\underline{non-empty list:}
+		\newline
+		
+		$foldr \ f \ u \ [3,2,1]$ should return $f \ 3 \ (f \ 2 \ (f \ 1 \ u))$
+		
+		\begin{align*}
+			foldr \ f \ u \ [3,2,1] &\triangleq \saq ((\la a.\la b.\la l.(l \ a \ b) \ f) \ u) \ [3,2,1] \\
+			&\equals (\la b.\la l.(l \ f \ b) \ u) \ [3,2,1] \\
+			&\equals \la l.(l \ f \ u) \ [3,2,1] \\
+			&\equals  ([3,2,1] \ f) \ u \\
+			&= \saq  (\la c.\la n. \ c \ 3 \ (c \ 2 \ (c \ 1 \ n)) \ f) \ u \\
+			&\equals \la n. \ f \ 3 \ (f \ 2 \ (f \ 1 \ n)) \ u \\
+			&\equals f \ 3 \ (f \ 2 \ (f \ 1 \ u))
+		\end{align*}
+		\newline
+		
+		explanation text here
+		\newline
+		
+		\underline{empty list:}
+		\newline
+		
+		$foldr \ f \ u \ [ \ ]$ should return $u$
+		
+		\begin{align*}
+			foldr \ f \ u \ [ \ ] &\triangleq \saq ((\la a.\la b.\la l.(l \ a \ b) \ f) \ u) \ [ \ ] \\
+			&\equals (\la b.\la l.(l \ f \ b) \ u) \ [ \ ] \\
+			&\equals \la l.(l \ f \ u) \ [ \ ] \\
+			&\equals ([ \ ] \ f) \ u \\
+			&= \saq  ((\la c.\la n. \ n) \ f )\ u \\
+			&\equals (\la n. \ n) \ u \\
+			&\equals u
+		\end{align*}
+		
+		explanation text here
+		\newline
+		
+		% ________
+		
+	\subsection{map}
+		
+		\textbf{Give a \lamb -term corresponding to Haskell function \textit{map} such as:}
 		
 		\begin{equation*}
 			map \ f \ [N_1\ ,..., \ N_k] \equalsT [f \ N_1 \ , f \ N_2 \ ,...,f \ N_k]
 		\end{equation*}
 		\newline
 		
-		answer here\\
+		The \lamb -term found for \textit{``map''} is:
+		\begin{equation*}
+			map \triangleq \la a.\la l.\la c. \ l \ (\la x.\ c \ a \ x)
+		\end{equation*}
+		\newline
+		
+		Proof by example using the \lamb -terms found for  \textit{``map''}:\\
+		
+		\underline{non-empty list:}
+		\newline
+		
+		$map \ f \ [3,2,1]$ should return $ [f \ 3 \ , \ f \ 2 \ , \  f \ 1]$
+		
+		\begin{align*}
+			map \ f \ [3,2,1] &\triangleq \saq (\la a.\la l.\la c. \ l \ (\la x.\ c \ a \ x) \ f) \ [3,2,1] \\
+			&\equals \la l.\la c. \ l \ (\la x.\ c \ f \ x) \ [3,2,1] \\
+			&\equals \la c. \ [3,2,1] \ (\la x.\ c \ f \ x) \\
+			&\equiv_\alpha \, \, \la c. \  (\la d.\la n. \ d \ 3 \ (d \ 2 \ (d \ 1 \ n)) \ (\la x.\ c \ f \ x)) \\
+			&\equals \la c. \  (\la n. \ (\la x.\ c \ f \ x) \ 3 \ ((\la x.\ c \ f \ x) \ 2 \ ((\la x.\ c \ f \ x) \ 1 \ n))) \\
+			&\equals \la c. \  (\la n. \ c\ f \ 3 \ ((\la x.\ c \ f \ x) \ 2 \ ((\la x.\ c \ f \ x) \ 1 \ n))) \\
+			&\equals \la c. \  (\la n. \ c\ f \ 3 \ (c \ f \ 2 \ ((\la x.\ c \ f \ x) \ 1 \ n))) \\
+			&\equals \la c. \  (\la n. \ c\ f \ 3 \ (c \ f \ 2 \ (c \ f \ 1 \ n))) \\
+			&= \saq \la c.\la n. \ c\ f \ 3 \ (c \ f \ 2 \ (c \ f \ 1 \ n))) \\
+			&= [\ f \ 3 \ , \ f \ 2 \ , \  f \ 1\ ]
+		\end{align*}
+		
+		explanation text here
+		\newline
+		
+		\underline{empty list:}
+		\newline
+		
+		$map \ f \ [ \ ]$ should return the empty-list $[ \ ]$
+		
+		\begin{align*}
+			map \ f \ [ \ ] &\triangleq \saq (\la a.\la l.\la c. \ l \ (\la x.\ c \ a \ x) \ f) \ [ \ ] \\
+			&\equals \la l.\la c. \ l \ (\la x.\ c \ f \ x) \ [ \ ] \\
+			&\equals \la c. \ [ \ ] \ (\la x.\ c \ f \ x) \\
+			&\equiv_\alpha \, \, \la c. \ (\la d.\la n.n) \ (\la x.\ c \ f \ x) \\
+			&\equals \la c.\la n.n \\
+			&= \saq [ \ ]
+		\end{align*}
+		\newline
+		
+		explanation text here
+		\newline
+		
+		% ________
 		
 		\textbf{Give a \lamb -term corresponding to infinite list $[0,1,2,...]$:}\\
 		
@@ -289,9 +384,11 @@
 	\section{ToDo}
 	
 	\begin{Large}
-		underline redexes\\
+		underline redexes and remove intermediate steps\\
 		
-		complete part 5\\
+		add explanation for part 5\\
+		
+		part 5c\\
 	\end{Large}
 
 \end{document}
