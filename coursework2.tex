@@ -50,25 +50,21 @@
 		\textbf{Show that the term \textit{``[3,2,1] times 1''} $\beta$-reduces to 6:}
 		
 		\begin{align*}
-			&= \saq [3,2,1] \ \tim \ 1 \\
-			&= \saq (\la c. \la n . \ c \ 3 \ (c \ 2 \ (c \ 1 \ n)) \ \tim ) \ 1 \\
-			&= \saq (\la n . \ c \ 3 \ (c \ 2 \ (c \ 1 \ n)) \ [\tim /c ]) \ 1 \\
-			&\equals (\la n . \ \tim \ 3 \ (\tim \ 2 \ (\tim \ 1 \ n))) \ 1 \\
-			&= \saq \tim \ 3 \ (\tim \ 2 \ (\tim \ 1 \ n)) \ [1/n] \\
-			&\equals \tim \ 3 \ (\tim \ 2 \ (\tim \ 1 \ 1)) \\
+			\saq [3,2,1] \ \tim \ 1 \ &\triangleq \saq (\underline{\la c. \la n . \ c \ 3 \ (c \ 2 \ (c \ 1 \ n)) \ \tim }) \ 1 \\
+			&\equals (\underline{ \la n . \ \tim \ 3 \ (\tim \ 2 \ (\tim \ 1 \ n))) \ 1} \\
+			&\equals \tim \ 3 \ (\tim \ 2 \ (\underline{\tim \ 1 \ 1})) \\
 			&\equals \tim \ 3 \ (\tim \ 2 \ (1 \times 1)) \\
-			&= \saq \tim \ 3 \ (\tim \ 2 \ (1)) \\
+			&= \saq \tim \ 3 \ (\underline{\tim \ 2 \ (1)}) \\
 			&\equals \tim \ 3 \ (2 \times 1) \\
-			&= \saq \tim \ 3 \ (2) \\
+			&= \saq \underline{\tim \ 3 \ (2)} \\
 			&\equals 3 \times 2 \\
 			&= \saq 6
 		\end{align*}
+		
+		``$\tim \ m \ n \ \equals n \times m$'' was used for this part.\\
 		\newline
 		
-		``$\tim \ m \ n \ \equals n \times m$'' was used for this part.
-		
 	\end{Large}
-	\newpage
 	
 	
 	% _________________________________ PART 2 _________________________________
@@ -80,19 +76,14 @@
 		\textbf{Reduce \textit{``cons 3 [2,1]''} to \textit{``[3,2,1]''}:}
 		
 		\begin{align*}
-			cons \ 3 \ [2,1] \saq &= \saq (((\la x.\la l.\la c.\la n \ c \ x \ (l \ c \ n))\ 3) \ [2,1] \\
-			&= \saq (\la l.\la c.\la n \ c \ x \ (l \ c \ n) \ [3/x] \ ) \ [2,1] \\
-			&\equals (\la l.\la c.\la n \ c \ 3 \ (l \ c \ n)) \ [2,1] \\
-			&= \saq \la c.\la n \ c \ 3 \ (l \ c \ n) \ [ \ [2,1] / l \ ] \\
-			&\equals \la c.\la n \ c \ 3 \ ([2,1] \ c \ n) \\
-			&\equiv_\alpha \, \, \la c.\la n \ c \ 3 \ (\la d.\la m. \ d \ 2 \ (d \ 1 \ m) \ c \ n) \\
-			&= \saq \la c.\la n \ c \ 3 \ (\la m. \ d \ 2 \ (d \ 1 \ m) \ [c/d] \ n) \\
-			&\equals \la c.\la n \ c \ 3 \ (\la m. \ c \ 2 \ (c \ 1 \ m) \ n) \\
-			&= \saq \la c.\la n \ c \ 3 \ ( c \ 2 \ (c \ 1 \ m) \ [n/m]) \\
+			cons \ 3 \ [2,1] \saq &= \saq (((\underline{\la x.\la l.\la c.\la n \ c \ x \ (l \ c \ n))\ 3}) \ [2,1] \\
+			&\equals (\underline{\la l.\la c.\la n \ c \ 3 \ (l \ c \ n)) \ [2,1]} \\
+			&\equals \la c.\la n \ c \ 3 \ (\underline{[2,1]} \ c \ n) \\
+			&\equiv_\alpha \, \, \la c.\la n \ c \ 3 \ (\underline{\la d.\la m. \ d \ 2 \ (d \ 1 \ m) \ c} \ n) \\
+			&\equals \la c.\la n \ c \ 3 \ (\underline{\la m. \ c \ 2 \ (c \ 1 \ m) \ n}) \\
 			&\equals \la c.\la n \ c \ 3 \ ( c \ 2 \ (c \ 1 \ n)) \\
 			&= \saq [3,2,1]
 		\end{align*}
-		\newline
 		
 		``$cons \triangleq \la x.\la .l.\la x.\la n. \ c \ x \ (l \ c \ n)$'' was used for this part.
 		
@@ -118,6 +109,7 @@
 		\begin{equation*}
 			head \triangleq \la l.l \ (\la .x.\la y.x) \ n
 		\end{equation*}
+		\newline
 		
 		The \lamb -term found for \textit{``empty''} is:
 		\begin{equation*}
@@ -128,48 +120,31 @@
 		Proof by example using the \lamb -terms found for  \textit{``head''} and \textit{``empty''}:
 		
 		\begin{align*}
-			head \ [2,1] &\triangleq \saq (\la l.l \ (\la .x.\la y.x) \ n) \ \la c.\la n. \ c \ 2 \ (c \ 1 \ n) \\
-			&= \saq (l \ (\la .x.\la y.x) \ n) \ [\la c.\la n. \ c \ 2 \ (c \ 1 \ n) \ / \ l] \\
-			&\equals (\la c.\la n. \ c \ 2 \ (c \ 1 \ n)) \ (\la .x.\la y.x) \ n \\
-			&= \saq (\la n. \ c \ 2 \ (c \ 1 \ n) \ [\la .x.\la y.x \ / \ c] ) \ n \\
-			&\equals \la n.\ ((\la .x.\la y.x) \ 2) \ (((\la .x.\la y.x) \ 1) \ n) \ n \\
-			&= \saq (((\la .x.\la y.x) \ 2) \ (((\la .x.\la y.x) \ 1) \ n)) \ [n / n] \\
-			&\equals ((\la .x.\la y.x) \ 2) \ (((\la .x.\la y.x) \ 1) \ n) \\
-			&= \saq ((\la .x.\la y.x) \ 2) \ (\la y.x \ [1 / x] \ n) \\
-			&\equals ((\la .x.\la y.x) \ 2) \ ((\la y.1 ) \ n) \\
-			&= \saq ((\la .x.\la y.x) \ 2) \ (1 \ [n/y]) \\
-			&\equals ((\la .x.\la y.x) \ 2) \ 1 \\
-			&= \saq (\la y.x\ [2/x]) \ 1 \\
-			&\equals (\la y.2) \ 1 \\
-			&= \saq 2 \ [1/y] \\
+			head \ [2,1] \ &\triangleq \saq \underline{(\la l.l \ (\la .x.\la y.x) \ n) \ \la c.\la n. \ c \ 2 \ (c \ 1 \ n)} \\
+			&\equals (\underline{\la c.\la n. \ c \ 2 \ (c \ 1 \ n)) \ (\la .x.\la y.x}) \ n \\
+			&\equals \underline{\la n.\ ((\la .x.\la y.x) \ 2) \ (((\la .x.\la y.x) \ 1) \ n) \ n} \\
+			&\equals ((\la .x.\la y.x) \ 2) \ ((\underline{(\la .x.\la y.x) \ 1}) \ n) \\
+			&\equals ((\la .x.\la y.x) \ 2) \ ((\underline{\la y.1 ) \ n}) \\
+			&\equals ((\underline{\la .x.\la y.x) \ 2}) \ 1 \\
+			&\equals (\underline{\la y.2) \ 1} \\
 			&\equals 2
 		\end{align*}
 		
 		\begin{align*}
-			empty \ [ \ ] &\triangleq \saq (\la l.l \ (\la .a.\la b.false) \ true) \ \la c.\la n.n \\
-			&= \saq (l \ (\la .a.\la b.false) \ true) \ [\la c.\la n.n \ / \ l] \\
-			&\equals \la c.\la n.n \ (\la .a.\la b.false) \ true \\
-			&= \saq \la n.n \ [\la .a.\la b.false \ / \ c] \ true \\
-			&\equals (\la n.n) \ true \\
-			&= \saq n \ [true \ / \ n] \\
+			empty \ [ \ ] \ &\triangleq \saq \underline{(\la l.l \ (\la .a.\la b.false) \ true) \ \la c.\la n.n} \\
+			&\equals \underline{\la c.\la n.n \ (\la .a.\la b.false)} \ true \\
+			&\equals (\underline{\la n.n) \ true} \\
 			&\equals true
 		\end{align*}
 		
 		\begin{align*}
-			empty \ [2,1] &\triangleq \saq (\la l.l \ (\la .a.\la b.false) \ true) \ \la c.\la n. \ c \ 2 \ (c \ 1 \ n) \\
-			&= \saq (l \ (\la .a.\la b.false) \ true) \ [\la c.\la n. \ c \ 2 \ (c \ 1 \ n) \ / \ l] \\
-			&\equals (\la c.\la n. \ c \ 2 \ (c \ 1 \ n)) \ (\la .a.\la b.false) \ true \\
-			&= \saq (\la n. \ c \ 2 \ (c \ 1 \ n)) \ [\la .a.\la b.false \ / \ c] \ true \\
-			&\equals (\la n. \ ((\la .a.\la b.false) \ 2) \ (((\la .a.\la b.false) \ 1) \ n)) \ true \\
-			&= \saq ((\la .a.\la b.false) \ 2) \ (((\la .a.\la b.false) \ 1) \ n \ [true/n]) \\
-			&\equals ((\la .a.\la b.false) \ 2) \ (((\la .a.\la b.false) \ 1) \ true) \\
-			&= \saq ((\la .a.\la b.false) \ 2) \ ((\la b.false \ [1/a]) \ true) \\
-			&\equals ((\la .a.\la b.false) \ 2) \ ((\la b.false) \ true) \\
-			&=\saq ((\la .a.\la b.false) \ 2) \ (false \ [true/b]) \\
-			&\equals ((\la .a.\la b.false) \ 2) \ false \\
-			&= \saq (\la b.false \ [2/a]) \ false \\
-			&\equals (\la b.false) \ false \\
-			&= \saq false \ [false/b] \\
+			empty \ [2,1] \ &\triangleq \saq \underline{(\la l.l \ (\la .a.\la b.false) \ true) \ \la c.\la n. \ c \ 2 \ (c \ 1 \ n)} \\
+			&\equals \underline{(\la c.\la n. \ c \ 2 \ (c \ 1 \ n)) \ (\la .a.\la b.false)} \ true \\
+			&\equals \underline{(\la n. \ ((\la .a.\la b.false) \ 2) \ (((\la .a.\la b.false) \ 1) \ n)) \ true} \\
+			&\equals ((\la .a.\la b.false) \ 2) \ ((\underline{(\la .a.\la b.false) \ 1}) \ true) \\
+			&\equals ((\la .a.\la b.false) \ 2) \ ((\underline{\la b.false) \ true}) \\
+			&\equals (\underline{(\la .a.\la b.false) \ 2}) \ false \\
+			&\equals (\underline{\la b.false) \ false} \\
 			&\equals false
 		\end{align*}
 		\newline
@@ -281,12 +256,12 @@
 		$foldr \ f \ u \ [3,2,1]$ should return $f \ 3 \ (f \ 2 \ (f \ 1 \ u))$
 		
 		\begin{align*}
-			foldr \ f \ u \ [3,2,1] &\triangleq \saq ((\la a.\la b.\la l.(l \ a \ b) \ f) \ u) \ [3,2,1] \\
-			&\equals (\la b.\la l.(l \ f \ b) \ u) \ [3,2,1] \\
-			&\equals \la l.(l \ f \ u) \ [3,2,1] \\
+			foldr \ f \ u \ [3,2,1] &\triangleq \saq ((\underline{\la a.\la b.\la l.(l \ a \ b) \ f}) \ u) \ [3,2,1] \\
+			&\equals (\underline{\la b.\la l.(l \ f \ b) \ u}) \ [3,2,1] \\
+			&\equals \underline{\la l.(l \ f \ u) \ [3,2,1]} \\
 			&\equals  ([3,2,1] \ f) \ u \\
-			&= \saq  (\la c.\la n. \ c \ 3 \ (c \ 2 \ (c \ 1 \ n)) \ f) \ u \\
-			&\equals \la n. \ f \ 3 \ (f \ 2 \ (f \ 1 \ n)) \ u \\
+			&= \saq  (\underline{\la c.\la n. \ c \ 3 \ (c \ 2 \ (c \ 1 \ n)) \ f}) \ u \\
+			&\equals \underline{\la n. \ f \ 3 \ (f \ 2 \ (f \ 1 \ n)) \ u} \\
 			&\equals f \ 3 \ (f \ 2 \ (f \ 1 \ u))
 		\end{align*}
 		\newline
@@ -300,12 +275,12 @@
 		$foldr \ f \ u \ [ \ ]$ should return $u$
 		
 		\begin{align*}
-			foldr \ f \ u \ [ \ ] &\triangleq \saq ((\la a.\la b.\la l.(l \ a \ b) \ f) \ u) \ [ \ ] \\
-			&\equals (\la b.\la l.(l \ f \ b) \ u) \ [ \ ] \\
-			&\equals \la l.(l \ f \ u) \ [ \ ] \\
+			foldr \ f \ u \ [ \ ] &\triangleq \saq ((\underline{\la a.\la b.\la l.(l \ a \ b) \ f}) \ u) \ [ \ ] \\
+			&\equals (\underline{\la b.\la l.(l \ f \ b) \ u}) \ [ \ ] \\
+			&\equals \underline{\la l.(l \ f \ u) \ [ \ ]} \\
 			&\equals ([ \ ] \ f) \ u \\
-			&= \saq  ((\la c.\la n. \ n) \ f )\ u \\
-			&\equals (\la n. \ n) \ u \\
+			&= \saq  (\underline{(\la c.\la n. \ n) \ f} )\ u \\
+			&\equals (\underline{\la n.n) \ u} \\
 			&\equals u
 		\end{align*}
 		
@@ -337,13 +312,13 @@
 		$map \ f \ [3,2,1]$ should return $ [f \ 3 \ , \ f \ 2 \ , \  f \ 1]$
 		
 		\begin{align*}
-			map \ f \ [3,2,1] &\triangleq \saq (\la a.\la l.\la c. \ l \ (\la x.\ c \ a \ x) \ f) \ [3,2,1] \\
-			&\equals \la l.\la c. \ l \ (\la x.\ c \ f \ x) \ [3,2,1] \\
-			&\equals \la c. \ [3,2,1] \ (\la x.\ c \ f \ x) \\
-			&\equiv_\alpha \, \, \la c. \  (\la d.\la n. \ d \ 3 \ (d \ 2 \ (d \ 1 \ n)) \ (\la x.\ c \ f \ x)) \\
-			&\equals \la c. \  (\la n. \ (\la x.\ c \ f \ x) \ 3 \ ((\la x.\ c \ f \ x) \ 2 \ ((\la x.\ c \ f \ x) \ 1 \ n))) \\
-			&\equals \la c. \  (\la n. \ c\ f \ 3 \ ((\la x.\ c \ f \ x) \ 2 \ ((\la x.\ c \ f \ x) \ 1 \ n))) \\
-			&\equals \la c. \  (\la n. \ c\ f \ 3 \ (c \ f \ 2 \ ((\la x.\ c \ f \ x) \ 1 \ n))) \\
+			map \ f \ [3,2,1] &\triangleq \saq (\underline{\la a.\la l.\la c. \ l \ (\la x.\ c \ a \ x) \ f}) \ [3,2,1] \\
+			&\equals \underline{\la l.\la c. \ l \ (\la x.\ c \ f \ x) \ [3,2,1]} \\
+			&\equals \la c. \ \underline{[3,2,1]} \ (\la x.\ c \ f \ x) \\
+			&\equiv_\alpha \, \, \la c. \  (\underline{\la d.\la n. \ d \ 3 \ (d \ 2 \ (d \ 1 \ n)) \ (\la x.\ c \ f \ x)}) \\
+			&\equals \la c. \  (\la n. \ (\underline{\la x.\ c \ f \ x) \ 3} \ ((\la x.\ c \ f \ x) \ 2 \ ((\la x.\ c \ f \ x) \ 1 \ n))) \\
+			&\equals \la c. \  (\la n. \ c\ f \ 3 \ ((\underline{\la x.\ c \ f \ x) \ 2} \ ((\la x.\ c \ f \ x) \ 1 \ n))) \\
+			&\equals \la c. \  (\la n. \ c\ f \ 3 \ (c \ f \ 2 \ ((\underline{\la x.\ c \ f \ x) \ 1 \ n}))) \\
 			&\equals \la c. \  (\la n. \ c\ f \ 3 \ (c \ f \ 2 \ (c \ f \ 1 \ n))) \\
 			&= \saq \la c.\la n. \ c\ f \ 3 \ (c \ f \ 2 \ (c \ f \ 1 \ n))) \\
 			&= [\ f \ 3 \ , \ f \ 2 \ , \  f \ 1\ ]
@@ -358,10 +333,10 @@
 		$map \ f \ [ \ ]$ should return the empty-list $[ \ ]$
 		
 		\begin{align*}
-			map \ f \ [ \ ] &\triangleq \saq (\la a.\la l.\la c. \ l \ (\la x.\ c \ a \ x) \ f) \ [ \ ] \\
-			&\equals \la l.\la c. \ l \ (\la x.\ c \ f \ x) \ [ \ ] \\
-			&\equals \la c. \ [ \ ] \ (\la x.\ c \ f \ x) \\
-			&\equiv_\alpha \, \, \la c. \ (\la d.\la n.n) \ (\la x.\ c \ f \ x) \\
+			map \ f \ [ \ ] &\triangleq \saq (\underline{\la a.\la l.\la c. \ l \ (\la x.\ c \ a \ x) \ f}) \ [ \ ] \\
+			&\equals \underline{\la l.\la c. \ l \ (\la x.\ c \ f \ x) \ [ \ ]} \\
+			&\equals \la c. \ \underline{[ \ ]} \ (\la x.\ c \ f \ x) \\
+			&\equiv_\alpha \, \, \la c. \ (\underline{\la d.\la n.n) \ (\la x.\ c \ f \ x}) \\
 			&\equals \la c.\la n.n \\
 			&= \saq [ \ ]
 		\end{align*}
@@ -384,8 +359,6 @@
 	\section{ToDo}
 	
 	\begin{Large}
-		underline redexes and remove intermediate steps\\
-		
 		add explanation for part 5\\
 		
 		part 5c\\
