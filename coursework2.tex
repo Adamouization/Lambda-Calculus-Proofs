@@ -248,7 +248,21 @@
 		\end{equation*}
 		\newline
 		
-		Proof by example using the \lamb -terms found for  \textit{``foldr''}:\\
+		The function was created by analyzing the property it should have, which was provided by the coursework specification. Looking at the term, 
+		it can be seen that $foldr$ takes three inputs: the function $f$, the accumulator $u$ and the list $[N_1,...,N_k]$. 
+		In Haskell, $foldr$ is defined as the function that combines the accumulator $u$ to each list element using the function $f$, starting from the right and moving to the left.\\
+		
+		Looking more closely at the resulting term $f \ N_1\ (f \ N_2 \ ( \ ... \ (f \ N_k \ u)))$, which is obtained after performing the beta reductions, 
+		it is obvious that the term follows the same pattern as the one of a list: $c \ N_1 (c \ N_2 ( ... ( c \ N_k \ n)...))$,
+		with $c$ being replaced by $f$ and $n$ being replaced by $u$. \\
+		
+		This is achieved by substituting the inputs $a$, $b$, and $l$ from the term found for $foldr$ with their corresponding inputs 
+		to get a term with the list first, followed by $f$ and $u$, of the form $ ([N_1,...,N_k] \ f) \ u $. 
+		After extending the list, beta-reductions can be perfomed on the $cons$ and the $nil$ of the extended list, 
+		thus replacing each $cons$ by $f$ and each $nil$ by $u$, which corresponds to the term $foldr$ should beta-reduce to.\\
+		\newpage
+		
+		\underline{Proof by example using the \lamb -terms found for  \textit{``foldr''}:}\\
 		
 		\underline{non-empty list:}
 		\newline
@@ -266,13 +280,10 @@
 		\end{align*}
 		\newline
 		
-		explanation text here
-		\newline
-		
 		\underline{empty list:}
 		\newline
 		
-		$foldr \ f \ u \ [ \ ]$ should return $u$
+		$foldr \ f \ u \ [ \ ]$ should return $u$, since $nil$ is replaced by the accumulator $u$:
 		
 		\begin{align*}
 			foldr \ f \ u \ [ \ ] &\triangleq \saq ((\underline{\la a.\la b.\la l.(l \ a \ b) \ f}) \ u) \ [ \ ] \\
@@ -283,9 +294,7 @@
 			&\equals (\underline{\la n.n) \ u} \\
 			&\equals u
 		\end{align*}
-		
-		explanation text here
-		\newline
+		\newpage
 		
 		% ________
 		
@@ -304,7 +313,20 @@
 		\end{equation*}
 		\newline
 		
-		Proof by example using the \lamb -terms found for  \textit{``map''}:\\
+		Looking at the property $map$ should have (given by the coursework specification), the objective is to build a function which 
+		applies a function $f$ to each element of a list. This also corresponds to the definition of the $map$ function in Haskell.
+		Looking at the term, $map$ takes two inputs: the function $f$ which needs to be applied to each element of the list $[N_1,...,N_k]$, which is the second input.\\
+		
+		The resulting term corresponds to a list where $f$ is applied to each of its elements. Consequently, the function $map$ should build 
+		a list of the type $\la c.\la n.c \ N_1 (c \ N_2 ( ... ( c \ N_k \ n)...))$, inserting $f$ between each $c$ and $N$ for each element of 
+		the list to get a term of the form $\la c.\la n.c \ N_1 (c \ N_2 ( ... ( c \ N_k \ n)...))$.\\
+		
+		This can be done by substituting inputs $a$ and $l$ from the term found for $map$ with their corresponding inputs to get a term starting with $\la c$, 
+		followed by the list and ending with a term $(\la x.c \ f \ x)$ which keeps the form $(c f x)$ when beta-reduced, with $x$ corresponding to the rest of the list.
+		Performing beta-reductions from left to right builds a list with $f$ between $c$ and $N$, until the end of the list is reached.
+		\newpage
+		
+		\underline{Proof by example using the \lamb -terms found for  \textit{``map''}:}\\
 		
 		\underline{non-empty list:}
 		\newline
@@ -324,9 +346,6 @@
 			&= [\ f \ 3 \ , \ f \ 2 \ , \  f \ 1\ ]
 		\end{align*}
 		
-		explanation text here
-		\newline
-		
 		\underline{empty list:}
 		\newline
 		
@@ -340,28 +359,39 @@
 			&\equals \la c.\la n.n \\
 			&= \saq [ \ ]
 		\end{align*}
-		\newline
+		\newpage
 		
-		explanation text here
-		\newline
 		
 		% ________
 		
+	\subsection{infinite list}
+		
 		\textbf{Give a \lamb -term corresponding to infinite list $[0,1,2,...]$:}\\
 		
-		answer here
-	\end{Large}
-	
-	% _________________________________ TODO _________________________________
-	
-	\newpage
-	
-	\section{ToDo}
-	
-	\begin{Large}
-		add explanation for part 5\\
+		The infinite list can be written as $[0,1,2,3,...]$.\\
 		
-		part 5c\\
+		It is considered to start from the point 0 onwards.\\
+		
+		To begin with, the infinite list can be written as $infinite \triangleq infinite \ m$.
+		There are two cases to take into account: when $m=0$, and $m \neq 0$.\\
+		
+		Combined with the term for a finite list $\la c.\la n.c \ N_1 (c \ N_2 ( ... ( c \ N_k \ n)...))$, a first idea of the logic of the infinite list can be written:\\
+		
+		$if \ m=0 \ then \ (\la c.\ c \ m \ infinite (succ \ m))$\\
+		$else \ if \ m \neq 0 \ (c \ m ( infinite (succ \ m))) $\\
+		
+		Note that the n is not included since the empty list is impossible in an infinite list.\\
+		
+		Using the logic stated previously, the term for $infinite$ can be written:\\
+		
+		$infinite \ = \ \la m. \ ifthen(iszero \ m)(\la c.\ c \ m \ infinite (succ \ m)) \ (c \ m ( infinite (succ \ m)))$\\
+		
+		where: $ifthen \triangleq \la a.\la x.\la y. \ (a \ x \ y)$\\
+		where: $iszero \triangleq \la n.n\ (\la w. false \ true)$\\
+		where $succ \triangleq \la n.\la f . \la x. \ f(n\ f \ x)$\\
+		
+		To end, the Y-combinator is applied to this term to get an infinitely recursive list.
+		
 	\end{Large}
 
 \end{document}
